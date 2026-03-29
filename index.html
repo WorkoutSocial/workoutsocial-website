@@ -769,7 +769,7 @@
                 </svg>
                 <span class="header-logo-text">WorkoutSocial</span>
             </a>
-            <a href="https://testflight.apple.com/join/YOUR_TESTFLIGHT_CODE" class="btn btn-primary btn-sm">
+            <a href="https://testflight.apple.com/join/X9CSKh3f" class="btn btn-primary btn-sm">
                 Download App
             </a>
         </div>
@@ -810,11 +810,11 @@
                         <span style="background: linear-gradient(135deg, #38BDF8, #7DD3FC);"></span>
                         <span style="background: linear-gradient(135deg, #FBBF24, #FDE68A);"></span>
                     </div>
-                    <span>Join 500+ users building consistency</span>
+                    <span>Join a community building consistency</span>
                 </div>
 
                 <div class="cta-buttons" data-animate>
-                    <a href="https://testflight.apple.com/join/YOUR_TESTFLIGHT_CODE" class="btn btn-primary">
+                    <a href="https://testflight.apple.com/join/X9CSKh3f" class="btn btn-primary">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
                         </svg>
@@ -946,20 +946,12 @@
             <div class="container">
                 <div class="stats-grid" data-animate>
                     <div class="stat-card">
-                        <span class="stat-value">10,000+</span>
+                        <span class="stat-value">148</span>
                         <span class="stat-label">Workouts Logged</span>
                     </div>
                     <div class="stat-card">
                         <span class="stat-value">85%</span>
                         <span class="stat-label">Avg. Consistency</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-value">500+</span>
-                        <span class="stat-label">Active Users</span>
-                    </div>
-                    <div class="stat-card">
-                        <span class="stat-value">4.9</span>
-                        <span class="stat-label">User Rating</span>
                     </div>
                 </div>
             </div>
@@ -971,8 +963,8 @@
                 <div class="cta-card" data-animate>
                     <div class="cta-card-glow"></div>
                     <h2>Ready to Build Consistency?</h2>
-                    <p>Join hundreds of people who never skip a workout.</p>
-                    <a href="https://testflight.apple.com/join/YOUR_TESTFLIGHT_CODE" class="btn btn-primary btn-lg">
+                    <p>Join a community that never skips a workout.</p>
+                    <a href="https://testflight.apple.com/join/X9CSKh3f" class="btn btn-primary btn-lg">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
                         </svg>
@@ -1007,7 +999,7 @@
                     <h5>Product</h5>
                     <a href="#features">Features</a>
                     <a href="#how-it-works">How It Works</a>
-                    <a href="https://testflight.apple.com/join/YOUR_TESTFLIGHT_CODE">Download</a>
+                    <a href="https://testflight.apple.com/join/X9CSKh3f">Download</a>
                 </div>
 
                 <div class="footer-col">
@@ -1054,6 +1046,68 @@
         document.querySelectorAll('.features-grid .feature-card, .stats-grid .stat-card, .steps .step').forEach((el, i) => {
             el.style.transitionDelay = (i * 0.1) + 's';
         });
+
+        // Desktop TestFlight intercept — show modal instead of navigating
+        (function() {
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            if (isMobile) return; // on mobile, let the link work normally
+
+            // Create modal
+            const overlay = document.createElement('div');
+            overlay.id = 'tf-modal-overlay';
+            overlay.innerHTML = `
+                <div id="tf-modal">
+                    <div style="font-size:2.5rem;margin-bottom:0.5rem;">📱</div>
+                    <h3 style="margin:0 0 0.5rem;color:#fff;font-size:1.25rem;">Open on Your iPhone</h3>
+                    <p style="margin:0 0 1.25rem;color:rgba(255,255,255,0.7);font-size:0.95rem;line-height:1.5;">
+                        WorkoutSocial is available through Apple TestFlight.<br>
+                        Open this link on your iPhone to install the app.
+                    </p>
+                    <button id="tf-copy-btn" style="
+                        background:linear-gradient(135deg,#E07A4D,#E8936A);
+                        border:none;color:#fff;padding:0.65rem 1.5rem;border-radius:0.5rem;
+                        font-size:0.95rem;cursor:pointer;font-weight:600;margin-bottom:0.75rem;width:100%;
+                    ">Copy Link</button>
+                    <button id="tf-close-btn" style="
+                        background:transparent;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);
+                        padding:0.5rem 1.5rem;border-radius:0.5rem;font-size:0.875rem;cursor:pointer;width:100%;
+                    ">Close</button>
+                </div>
+            `;
+            Object.assign(overlay.style, {
+                display:'none',position:'fixed',inset:'0',background:'rgba(0,0,0,0.7)',
+                backdropFilter:'blur(8px)',zIndex:'9999',justifyContent:'center',alignItems:'center'
+            });
+            const modalStyle = 'background:rgba(30,30,30,0.95);border:1px solid rgba(255,255,255,0.1);' +
+                'border-radius:1rem;padding:2rem;max-width:360px;width:90%;text-align:center;';
+            document.body.appendChild(overlay);
+            overlay.querySelector('#tf-modal').style.cssText = modalStyle;
+
+            let currentHref = '';
+
+            document.querySelectorAll('a[href*="testflight.apple.com"]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    currentHref = this.href;
+                    overlay.style.display = 'flex';
+                });
+            });
+
+            overlay.querySelector('#tf-copy-btn').addEventListener('click', function() {
+                navigator.clipboard.writeText(currentHref).then(() => {
+                    this.textContent = 'Copied!';
+                    setTimeout(() => { this.textContent = 'Copy Link'; }, 2000);
+                });
+            });
+
+            overlay.querySelector('#tf-close-btn').addEventListener('click', () => {
+                overlay.style.display = 'none';
+            });
+
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) overlay.style.display = 'none';
+            });
+        })();
     </script>
 </body>
 </html>
