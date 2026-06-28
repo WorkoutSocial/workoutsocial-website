@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WorkoutSocial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root { --ember:#F2542F; --bg:#0C0907; --card:#1A1310; --text:#FFFFFF; --muted:rgba(255,255,255,.6); }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Inter',system-ui,sans-serif; background:var(--bg); color:var(--text);
+           min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px;
+           background-image:radial-gradient(circle at 50% 20%, rgba(242,84,47,.18), transparent 60%); }
+    .wrap { width:100%; max-width:380px; text-align:center; }
+    .flame { font-size:64px; line-height:1; }
+    .brand { font-weight:900; font-size:20px; letter-spacing:.5px; margin-top:6px; }
+    h1 { font-size:28px; font-weight:900; margin-top:24px; line-height:1.2; }
+    p.sub { color:var(--muted); font-size:15px; margin-top:10px; line-height:1.5; }
+    .code-card { background:var(--card); border:1px solid rgba(255,255,255,.08); border-radius:16px;
+                 padding:18px; margin-top:24px; }
+    .code-label { color:var(--muted); font-size:12px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; }
+    .code { font-size:34px; font-weight:900; letter-spacing:4px; color:var(--ember); margin-top:6px; }
+    .btn { display:block; width:100%; padding:15px; border-radius:14px; font-weight:800; font-size:16px;
+           text-decoration:none; margin-top:12px; }
+    .btn-primary { background:var(--ember); color:#fff; }
+    .btn-ghost { background:transparent; color:var(--text); border:1px solid rgba(255,255,255,.15); }
+    .hint { color:var(--muted); font-size:13px; margin-top:20px; line-height:1.5; }
+    .hint b { color:var(--text); }
+    a.plain { color:var(--ember); text-decoration:none; }
+  </style>
+</head>
+<body>
+  <div class="wrap" id="app"></div>
+  <script>
+    var path = window.location.pathname;            // e.g. /pod/AB12CD
+    var m = path.match(/^\/pod\/([A-Za-z0-9]+)/);
+    var isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    var el = document.getElementById('app');
+
+    if (m) {
+      var code = m[1].toUpperCase();
+      // If the app is installed it may pick up the custom scheme; harmless otherwise.
+      var deep = 'workoutsocial://pod/' + code;
+      var testflight = 'https://testflight.apple.com/join/X9CSKh3f';
+      var play = 'https://play.google.com/store/apps/details?id=com.workoutsocial.app';
+      var store = isiOS ? testflight : play;
+      var storeLabel = isiOS ? 'Get WorkoutSocial (TestFlight)' : 'Get WorkoutSocial on Google Play';
+
+      el.innerHTML =
+        '<div class="flame">🔥</div>' +
+        '<div class="brand">WorkoutSocial</div>' +
+        '<h1>You\'re invited to a pod</h1>' +
+        '<p class="sub">A friend wants you to keep the fire alive together — up to 5 people, one shared streak.</p>' +
+        '<div class="code-card"><div class="code-label">Your invite code</div><div class="code">' + code + '</div></div>' +
+        '<a class="btn btn-primary" href="' + deep + '">Open in the app</a>' +
+        '<a class="btn btn-ghost" href="' + store + '">' + storeLabel + '</a>' +
+        '<p class="hint">Already have the app? Open it → <b>Pod</b> tab → <b>Join</b> and enter code <b>' + code + '</b>.</p>';
+    } else {
+      el.innerHTML =
+        '<div class="flame">🔥</div>' +
+        '<div class="brand">WorkoutSocial</div>' +
+        '<h1>Page not found</h1>' +
+        '<p class="sub">That link doesn\'t exist.</p>' +
+        '<a class="btn btn-primary" href="/">Go home</a>';
+    }
+  </script>
+</body>
+</html>
