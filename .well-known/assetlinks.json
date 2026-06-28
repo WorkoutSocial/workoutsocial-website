@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.workoutsocial.app",
+      "sha256_cert_fingerprints": [
+        "56:20:EE:5B:DB:28:C5:E1:3D:09:22:CD:18:E3:DB:18:0C:A3:D5:D2:3C:92:5D:C1:65:7B:7A:83:80:C9:18:1B",
+        "CD:31:34:55:56:2A:5E:B2:EF:18:2C:6E:52:00:81:EE:3B:20:C8:7B:4C:59:2B:5E:53:26:2E:E2:A1:7B:ED:B4"
+      ]
+    }
+  }
+]
