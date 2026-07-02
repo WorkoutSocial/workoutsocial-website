@@ -1,206 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verify Email - WorkoutSocial</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
-            min-height: 100vh;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .container {
-            text-align: center;
-            padding: 48px 24px;
-            max-width: 480px;
-        }
-        
-        .icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #E07A4D, #C86A3F);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 24px;
-            font-size: 40px;
-        }
-        
-        h1 {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-        
-        p {
-            color: #9ca3af;
-            margin-bottom: 24px;
-            line-height: 1.6;
-        }
-        
-        .btn {
-            display: inline-block;
-            background: linear-gradient(135deg, #E07A4D, #C86A3F);
-            color: white;
-            padding: 16px 32px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 24px rgba(224, 122, 77, 0.4);
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(224, 122, 77, 0.5);
-        }
-        
-        .instructions {
-            margin-top: 32px;
-            padding: 24px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            text-align: left;
-        }
-        
-        .instructions h3 {
-            font-size: 14px;
-            font-weight: 600;
-            color: #ffffff;
-            margin-bottom: 12px;
-        }
-        
-        .instructions ol {
-            color: #9ca3af;
-            font-size: 14px;
-            padding-left: 20px;
-        }
-        
-        .instructions li {
-            margin-bottom: 8px;
-        }
-        
-        .loading {
-            display: none;
-            margin-top: 24px;
-        }
-        
-        .spinner {
-            width: 24px;
-            height: 24px;
-            border: 3px solid rgba(224, 122, 77, 0.3);
-            border-top-color: #E07A4D;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        .success {
-            display: none;
-            color: #10B981;
-        }
-        
-        .error {
-            display: none;
-            color: #EF4444;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verify email · WorkoutSocial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root { --ember:#F2542F; --bg:#0C0907; --card:#1A1310; --text:#fff; --muted:rgba(255,255,255,.6); --good:#46c26a; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Inter',system-ui,sans-serif; background:var(--bg); color:var(--text);
+           min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px;
+           background-image:radial-gradient(circle at 50% 20%, rgba(242,84,47,.18), transparent 60%); }
+    .wrap { width:100%; max-width:380px; text-align:center; }
+    .flame { font-size:56px; line-height:1; }
+    .brand { font-weight:900; font-size:20px; margin-top:6px; }
+    h1 { font-size:26px; font-weight:900; margin-top:22px; }
+    p.sub { color:var(--muted); font-size:15px; margin-top:10px; line-height:1.5; }
+    .ok { color:var(--good); }
+    .spinner { margin:26px auto 0; width:34px; height:34px; border-radius:50%;
+               border:3px solid rgba(255,255,255,.15); border-top-color:var(--ember);
+               animation:spin .8s linear infinite; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .hint { color:var(--muted); font-size:13px; margin-top:26px; line-height:1.6; }
+    .hint b { color:var(--text); }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="icon">✉️</div>
-        <h1>Verify Your Email</h1>
-        <p id="status-text">Click the button below to verify your email and open WorkoutSocial.</p>
-        
-        <a href="#" id="open-app-btn" class="btn">Open WorkoutSocial</a>
-        
-        <div class="loading" id="loading">
-            <div class="spinner"></div>
-            <p style="margin-top: 12px; font-size: 14px;">Opening app...</p>
-        </div>
-        
-        <p class="success" id="success">✓ Redirecting to app...</p>
-        <p class="error" id="error">Could not open app automatically.</p>
-        
-        <div class="instructions" id="instructions">
-            <h3>App didn't open?</h3>
-            <ol>
-                <li>Make sure WorkoutSocial is installed on your device</li>
-                <li>If using Gmail, try opening this link in Safari</li>
-                <li>Copy this page's URL and paste it in Safari</li>
-            </ol>
-        </div>
-    </div>
-    
-    <script>
-        // Get the token from URL parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        const token = urlParams.get('token');
-        
-        // Deep link URL
-        const deepLink = token 
-            ? `workoutsocial://verify-email?token=${token}`
-            : 'workoutsocial://';
-        
-        const openAppBtn = document.getElementById('open-app-btn');
-        const loading = document.getElementById('loading');
-        const success = document.getElementById('success');
-        const error = document.getElementById('error');
-        const instructions = document.getElementById('instructions');
-        const statusText = document.getElementById('status-text');
-        
-        // Update button href
-        openAppBtn.href = deepLink;
-        
-        // Try to open app automatically on page load
-        function tryOpenApp() {
-            loading.style.display = 'block';
-            instructions.style.display = 'none';
-            
-            // Try to open the app
-            window.location.href = deepLink;
-            
-            // After a delay, show instructions if still on page
-            setTimeout(() => {
-                loading.style.display = 'none';
-                instructions.style.display = 'block';
-            }, 2500);
-        }
-        
-        // Open app on button click
-        openAppBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            tryOpenApp();
-        });
-        
-        // Auto-try to open on mobile devices
-        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-        if (isMobile && token) {
-            // Small delay to let page render first
-            setTimeout(tryOpenApp, 500);
-        }
-    </script>
+  <div class="wrap">
+    <div class="flame">🔥</div>
+    <div class="brand">WorkoutSocial</div>
+    <h1 id="title">Verifying your email…</h1>
+    <p class="sub" id="msg">One sec — confirming it's really you.</p>
+    <div class="spinner" id="spin"></div>
+    <p class="hint" id="hint" style="display:none"></p>
+  </div>
+
+  <script>
+    // Verify right here on the web — no app, no specific browser needed.
+    // (The old page only deep-linked into the iOS app and told everyone else
+    // to "open in Safari", which stranded Android users.)
+    var API = 'https://api.workoutsocial.app';
+    var token = new URLSearchParams(window.location.search).get('token');
+    var title = document.getElementById('title'), msg = document.getElementById('msg');
+    var spin = document.getElementById('spin'), hint = document.getElementById('hint');
+
+    function done(ok, heading, body, hintHtml) {
+      spin.style.display = 'none';
+      title.textContent = heading;
+      if (ok) { title.className = 'ok'; }
+      msg.textContent = body;
+      if (hintHtml) { hint.innerHTML = hintHtml; hint.style.display = 'block'; }
+    }
+
+    if (!token) {
+      done(false, 'Missing link', 'This page needs the link from your verification email — try tapping it again.');
+    } else {
+      fetch(API + '/api/auth/verify-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: token }),
+      })
+      .then(function (r) { if (!r.ok) { throw r; } })
+      .then(function () {
+        done(true, '✓ Email verified', "You're all set — your fire's official.",
+          'Head back to the <b>WorkoutSocial app</b> and keep it alive. 🔥');
+      })
+      .catch(function () {
+        done(false, "Couldn't verify", 'The link may have expired (they last 24 hours).',
+          'Open the app and tap <b>resend verification email</b> to get a fresh link.');
+      });
+    }
+  </script>
 </body>
 </html>
